@@ -1,0 +1,142 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{stmaryrd}
+\usepackage{tikz}
+\usepackage[T1,T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[bulgarian]{babel}
+\usepackage[normalem]{ulem}
+\newcommand{\e}{\epsilon}
+\newcommand{\nextproblem}{\\ \vskip 0.1in}
+\newcommand{\tab}{\: \: \: \:}
+
+
+\title{Висша Алгебра ТК1 Решения}
+\author{Румен Димитров}
+\date{February 2019}
+
+\begin{document}
+\maketitle
+
+1. Формулирайте теоремата за делене с частно и остатък за цели числа \nextproblem
+$\forall a, b \in \mathbb{Z}, b \neq 0, \\
+\exists$ единствени $q, r \in \mathbb{Z}: a = bq + r, където 0 \leq r < |b|$. \nextproblem
+2. Напишете
+определението за най-голям общ делител на две цели числа \nextproblem
+Казваме, че $d$ е НОД на $a, b$, когато $d \mid a$ и $d \mid b$ \\
+и ако числото $d_1$ също е общ делител на $a$ и $b$, то $d_1 \mid d$. \nextproblem
+3. Напишете определението за наймалко общо кратно на две цели числа \nextproblem
+Казваме, че $d$ e НОК на $a, b$ когато $a \mid d $ и $b \mid d$ \\
+и ако $d_1$ също е общо кратно на $a$ и $b$, то $d \mid d_1$. \nextproblem
+4. Каква е връзката между най-голям общ делител и
+най-малко общо кратно на две цели числа \nextproblem
+Нека $(a, b)$ е НОД и $[a, b]$ е НОК на две цели числа $a, b$. Тогава е изпълнено $(a,b)[a,b] = ab$. \nextproblem
+5. Напишете равенството на Безу за две цели числа \nextproblem
+Ако $a$ и $b$ са две цели числа и $(a,b) = d$, то $\exists \: u, v \in \mathbb{Z}$, така че $ua + vb = d$. \nextproblem
+6. Формулирайте основната теорема на аритметиката \nextproblem
+Всяко $n > 1 \in \mathbb{N}$ се представя по единствен начин като произведение на прости числа, с точност до реда на множителите. \nextproblem
+7. Напишете определението за пълна система остатъци по модул n \nextproblem
+Пълна система остатъци по модул $n$ е всяка система от $n$ на брой несравними цели числа (Например $0, 1, ..., n-1 \mod{n}$). \nextproblem
+8. Напишете
+определението за редуцирана система остатъци по модул n \nextproblem
+Всяка система от $\phi(n)$ на брой ест. числа, несравними по модул $n$ и взаимно прости с $n$. Например, $1, 5, 7, 11$ е редуцирана (приведена) система остатъци по модул $12$. \nextproblem
+9. Напишете определението за
+функция на Ойлер \nextproblem
+Нека $n \in \mathbb{N}$. Броят на ест. числа, ненадминаващи $n$ и взаимно прости с $n$ обозначаваме $\phi(n)$ и наричаме функция на Ойлер. Например, $\phi(6) = 2$, защото от всички (естествени) числа преди $6$, само $1$ и $5$ са взаимно прости с $6$. \nextproblem
+10. Формулирайте теоремата на Ойлер \nextproblem
+Нека $n \in \mathbb{N}, r \in \mathbb{Z}$ и $(r,n) = 1$, тогава е изп. $r^{\phi(n)} \equiv 1 \mod{n}$. \nextproblem
+11. Формулирайте теоремата на
+Ферма \nextproblem
+Ако $p$ е просто число и $a \nmid p$, то $a^{p-1} \equiv 1 \mod{p}$. \nextproblem
+12. Напишете определението за това едно число да дели друго \nextproblem
+Казваме, че $b$ дели $a$, или $b \mid a$, когато $\exists q \in \mathbb{Z} : \: a = bq$. \nextproblem
+13. Напишете определението за това числото a да е сравнимо с числото b по модул n \nextproblem
+Нека $n \in \mathbb{N}, \: a,b \in \mathbb{Z}$. Казваме, че $a$ е сравнимо с $b$ по модул $n$, или \\
+$a \equiv b \mod{n} \iff n \mid (a-b)$. \nextproblem
+14. Формулирайте теоремата на Уилсън \nextproblem
+Ако $p$ е просто число, то е изп. $(p-1)! \equiv -1 \mod{p}$. \nextproblem
+15. Докажете, че за всяко цяло число a е изпълнено, че a | a \nextproblem
+По дефиниция искаме число $q$, така че $a = qa$. \\
+$q = 1$ работи, значи дефиницията е изпълнена и $a \mid a$. \nextproblem
+16. Докажете, че ако $a \mid b$ и $b \neq 0$, то $|a| \leq |b|$. \nextproblem
+По дефиниция, $b = qa, \: \: |q| \geq 1$ (защото $q$ трябва да е цяло число) $\implies$ \\
+$|b| = |qa| = |q||a|$. \\
+Сега, ако $q = \pm 1$, то $|b| = |a|$. В противен случай, $|b| > |a|$. \nextproblem
+17. Докажете, че ако a | b и b | c, то a | c \nextproblem
+По дефиниция, $b = q_1 a$, $c = q_2 b \implies$  \\
+$c = q_1 q_2 a, \: \: q_1 q_2 \in \mathbb{Z}$. Значи $a \mid c$. \nextproblem
+18. Докажете, че ако a | b
+и a | c, то a | b + c \nextproblem
+По дефиниция, $b = q_1 a, \: \: c = q_2 a \implies$ \\ \vskip 0.05 in
+$b+c = (q_1 + q_2)a, \: \: \: q_1 + q_2 \in \mathbb{Z}$. Значи $a \mid c$. \nextproblem
+19. Докажете, че за всяко цяло число a е изпълнено a $\equiv$ a (mod n) \nextproblem
+Искаме $n \mid (a-a)$, т.е. $n \mid 0$ \\
+Търсим $q$, така че $0 = nq$. Очевидно $q = 0$ върши работа. \nextproblem
+20. Докажете, че ако a $\equiv$ b (mod n), то b $\equiv$ a (mod n) \nextproblem
+$a \equiv b \mod{n} \iff$ \\
+$n \mid (a - b) \iff$ \\
+$\exists \: q \in \mathbb{Z}: \: \: (a-b) = qn$ \\
+Умножаваме и двете страни по -1 \\
+$b-a = (-q)n, \: \: (-q) \in \mathbb{Z} \implies$ \\
+$n \mid (b-a) \implies$ \\
+$b \equiv a \mod{n}$. \nextproblem
+21. Докажете, че ако a $\equiv$ b (mod n) и b $\equiv$ c
+(mod n), то a $\equiv$ c (mod n) \nextproblem
+По дефиниция, $n \mid (a-b), \tab n \mid (b-c) \implies$ \\
+$n \mid (a-b) + (b-c) \implies$ \\
+$n \mid (a-c) \: \: \implies \: \: a \equiv c \mod{n}$. \nextproblem
+22. Докажете, че ако a $\equiv$ b (mod n) и c $\equiv$ d (mod n), то a $\pm$ c $\equiv$ b $\pm$ d (mod n) \nextproblem
+$n \mid (a-b), \tab n \mid (c-d) \implies$ \\
+$n \mid (a-b) + (c-d) \implies$ \\
+$n \mid (a+c) - (b+d) \: \: \implies \: \: (a+c) \equiv (b+d) \mod{n}$. Също, \\ \\
+$n \mid (a-b) - (c-d) \implies$ \\
+$n \mid a - b - c + d \implies$ \\
+$n \mid (a-c) - (b-d) \: \: \implies \: \: (a-c) \equiv (b-d) \mod{n}$. \nextproblem
+23. Дайте пример за крайна група \nextproblem
+$\{-1, 1\}$ относно умножението \nextproblem
+24. Дайте пример за безкрайна група \nextproblem
+$(\mathbb{Z}, +)$ \nextproblem
+25. Дайте
+пример за абелева група \nextproblem
+Горните две, също $C_n$ etc \nextproblem
+26. Дайте пример за неабелева група \nextproblem
+$GL_n (F) = \{A \in M_{n,n} \mid detA \neq 0 \}$ е неабелева за $n \geq 2$. Например, $GL_3 (F)$ e неабелева. \nextproblem
+27. Дайте пример за крайна
+циклична група \nextproblem
+$C_4 = \{\pm i, \pm 1\}$ или \\
+$Z_4$ - Адитивна циклична група от ред 4 \nextproblem
+28. Дайте пример за безкрайна циклична група \nextproblem
+$\mathbb{Z} = \langle 1 \rangle = \langle -1 \rangle$ \nextproblem
+29. Напишете определението
+за циклична група \nextproblem
+$G$ е циклична, когато $\exists \: a \in G$, такъв че $\langle a \rangle = \{a^k \: | \: k \in \mathbb{Z}\} = G$. \nextproblem
+30. Напишете определението за ред на елемент от дадена група \nextproblem
+Нека $G$ e група и $g \in G$. Най-малкото естествено число $r$, за което $g^r = e$ наричаме ред на елемента $g$. Бележим го с $r(g)$ или $|g|$. Ако не съществува, казваме, че $g$ не е от краен ред и пишем $r(g) = \infty$. \nextproblem
+31. Напишете определението за съседен клас на група по нейна подгрупа \nextproblem
+Нека $G$ е група, $H \leq G, \: \: g \in G$. Тогава $gH = \{gh \: | \: h \in H\}$  наричаме ляв съседен клас на $G$ по $H$, a $Hg = \{hg \: | \: h \in H\}$ - десен съседен клас на $G$ по $H$. \nextproblem
+32. Напишете определението за индекс на подгрупа на дадена група в групата \nextproblem
+Нека $G$ е крайна група и $H \leq G$. Броя на левите (или десните) съседни класове на $G$ по $H$ наричаме индекс на $H$ в $G$ и бележим $|G:H|$. \nextproblem
+33. Формулирайте
+теоремата на Лагранж \nextproblem
+Нека $G$ е група, $|G| < \infty, \: \: H \leq G$. Тогава е изп. $|G| = |H| |G:H|$. \nextproblem
+34. Напишете определението за нормална подгрупа на дадена група \nextproblem
+Нека $G$ е група и $H \leq G$. Ако $\forall g \in G$ е изп. $gH = Hg$, то $H$ наричаме нормална подгрупа на $G$. \nextproblem
+35. Напишете определението за факторгрупа на дадена група по нейна нормална подгрупа \nextproblem
+Нека $G$ е група, $H \trianglelefteq G$. Групата, дефинирана по следния начин се нарича факторгрупа на $G$ по $H$: \\
+$G/H = \{gH \: | \: g \in G\}$ с операция $g_1 H g_2H = (g_1 g_2)H$. \nextproblem
+36. Напишете определението за ядро на хомоморфизъм на групи \nextproblem
+Нека $\phi : G \to G'$ е хомоморфизъм на групи. Ядро на $\phi$ дефинираме по следния начин: $Ker \phi = \{a \in G \: | \: \phi(a) = e\} \: \subseteq G$. \nextproblem
+37. Напишете определението за
+образ на хомоморфизъм на групи \nextproblem
+$\phi : G \to G'$ хомоморфизъм. $Im \phi = \{b = G' \: | \: \exists a \in G \: : \: \phi(a) = b\} \: \subseteq G'$ \nextproblem
+38. Формулирайте теоремата за хомоморфизмите за групи \nextproblem
+$\phi : G \to G'$ хомоморфизъм, нека $H$ = $Ker\phi$. Тогава $H \trianglelefteq G$ и $G/H \cong Im\phi$. \nextproblem
+39. Формулирайте втората теорема за хомоморфизмите за групи \nextproblem
+Нека $G$ е група, $H \trianglelefteq G, \: \: A \leq G$. Тогава $AH/H \cong A/A\cap H$. \nextproblem
+40. Формулирайте третата
+теорема за хомоморфизмите за групи \nextproblem
+Нека $G$ e група, $H \trianglelefteq G, \: \: A \trianglelefteq G$ и $H \leq A$. Тогава $A/H \trianglelefteq G/H$ и $(G/H)/(A/H) \cong G/A$.
+
+
+\end{document}
