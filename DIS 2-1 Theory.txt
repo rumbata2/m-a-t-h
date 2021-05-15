@@ -1,0 +1,391 @@
+\documentclass[10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[OT1]{fontenc}
+\usepackage{amsfonts, amsmath, amsthm, amssymb}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage[bulgarian]{babel}
+\usepackage{tcolorbox}
+
+\usepackage{xpatch}
+\makeatletter
+\xpatchcmd{\@thm}{\thm@headpunct{.}}{\thm@headpunct{}}{}{}
+\makeatother
+
+\theoremstyle{definition}
+\newtheorem{definition}{Дефиниция}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Задача}
+
+\theoremstyle{theorem}
+\newtheorem{proposition}{Твърдение}
+
+\newenvironment{alignnc*}
+ {\par$\!\aligned}
+ {\endaligned$\par}
+
+\graphicspath{ {./images/} }
+
+\newcounter{countCode}
+\lstnewenvironment{code} [1][caption=Ponme caption, label=default]{%
+	\renewcommand*{\lstlistingname}{Listado} 
+	\setcounter{lstlisting}{\value{countCode}} 
+	\lstset{ %
+	language=java,
+	basicstyle=\ttfamily\footnotesize,       % the size of the fonts that are used for the code
+	numbers=left,                   % where to put the line-numbers
+	numberstyle=\sc,      % the size of the fonts that are used for the line-numbers
+	stepnumber=1,                   % the step between two line-numbers. 
+	numbersep=5pt,                 % how far the line-numbers are from the code
+	numberstyle=\color{red!50!blue},
+    	backgroundcolor=\color{lightgray!20},
+	rulecolor=\color{blue},
+	keywordstyle=\color{red}\bfseries,
+	showspaces=false,               % show spaces adding particular underscores
+	showstringspaces=false,         % underline spaces within strings
+	showtabs=false,                 % show tabs within strings adding particular underscores
+	frame=single,                   % adds a frame around the code
+	framexleftmargin=0mm,
+	numberblanklines=false,
+	xleftmargin=5pt,
+	breaklines=true,
+	breakatwhitespace=true,
+	breakautoindent=true,
+	captionpos=t,
+	texcl=true,
+	tabsize=2,                      % sets default tabsize to 3 spaces
+	extendedchars=true,
+	inputencoding=utf8, 
+	escapechar=\%,
+	morekeywords={print, println, size, background, strokeWeight, fill, line, rect, ellipse, triangle, arc, save, PI, HALF_PI, QUARTER_PI, TAU, TWO_PI, width, height,},
+	emph=[1]{print,println,}, emphstyle=[1]{\color{blue}}, % Mis palabras clave.
+	emph=[2]{width,height,}, emphstyle=[2]{\bf\color{violet}}, % Mis palabras clave.
+	emph=[3]{PI, HALF_PI, QUARTER_PI, TAU, TWO_PI}, emphstyle=[3]\color{orange!50!violet}, % Mis palabras clave.
+	emph=[4]{line, rect, ellipse, triangle, arc,}, emphstyle=[4]\color{green!70!black}, % Mis palabras clave.
+	%emph=[5]{size, background, strokeWeight, fill,}, emphstyle=[5]{\tt \color{red!30!blue}}, % Mis palabras clave.
+	%emph={[2]sqrt,baset}, emphstyle={[2]\color{blue}}, % f(sqrt(2)), sqrt a nivel 2 se pondrá azul
+	#1}}{\addtocounter{countCode}{1}}
+
+
+
+\title{Някои части от теория по ДИС-2, СУ ФМИ}
+\author{Румен Димитров}
+\date{}
+\begin{document}
+\maketitle 
+
+\begin{definition}
+    Несобствен интеграл от \textbf{първи} род наричаме интеграл от вида $\displaystyle I_1 = \int_a^\infty f(x)dx$ или 
+    от вида $\displaystyle I_2 = \int_{-\infty}^b f(x)dx$.\\
+    Интегралът $I_1$ наричаме сходящ, ако съществува границата $\displaystyle \lim_{A \rightarrow \infty} \int_a^A f(x)dx$.\\
+    Съответно $I_2$ е сходящ, ако съществува границата $\displaystyle \lim_{B \rightarrow -\infty} \int_B^b f(x)dx$.    
+\end{definition}
+
+\begin{definition}
+    Несобствен интеграл от \textbf{втори} род наричаме интеграл от вида $\displaystyle \int_a^b f(x)dx,$ където е 
+    изпълнено поне едното от 
+    \begin{itemize}
+        \item $\displaystyle \lim_{x \rightarrow a^+}f(x)dx = \pm \infty;$
+        \item $\displaystyle \lim_{x \rightarrow b^-}f(x)dx = \pm \infty.$
+    \end{itemize}
+    Несобственият интеграл $\displaystyle \int_a^b f(x)dx$ с особена точка $a$ е сходящ, ако съществува границата 
+    $\displaystyle \lim_{\varepsilon \rightarrow 0} \int_{a+\varepsilon}^b f(x)dx.$
+\end{definition}
+
+\begin{definition}
+    Несобственият интеграл $\displaystyle \int_a^\infty f(x)dx$ се нарича абсолютно сходящ, ако е сходящ интегралът 
+    $\displaystyle \int_a^\infty |f(x)| \: dx$.
+\end{definition}
+
+\begin{definition}
+    Нека е дадена редица $\{a_n\}_{n=1}^\infty$. Сумата $\displaystyle S_n := \sum_{k=1}^n a_k$ ще наричаме $n-$та парциална (частична) сума.
+    (\textit{Отбелязваме, че $S_n$ само по себе си е редица, по-общо - функция.})\\
+    Редът $\displaystyle \sum_{n=1}^\infty a_n$ ще наричаме границата $\displaystyle \lim_{n \rightarrow \infty} S_n = S$. Ако границата съществува, т.е 
+    $S < \infty,$ то редът $\displaystyle \sum_{n=1}^\infty a_n$ наричаме сходящ, а $S$ - неговата сума.
+\end{definition}
+
+\begin{definition}
+    Редът $\displaystyle \sum_{n=1}^\infty a_n$ се нарича абсолютно сходящ, ако е сходящ редът $\displaystyle \sum_{n=1}^\infty |a_n|$.
+\end{definition}
+
+\begin{definition}
+    Редът $\displaystyle \sum_{n=1}^\infty a_n$ се нарича условно сходящ, ако не е абсолютно сходящ, но е сходящ.
+\end{definition}
+\clearpage
+\begin{proposition}
+    \textbf{(Необходимо условие (на Коши?) за сходимост на ред)}\\
+    Нека $\displaystyle \sum_{n=1}^\infty a_n$ e сходящ, тогава 
+    следва, че редицата $a_n$ клони към $0,$ т.е $\displaystyle \lim_{n \rightarrow \infty} a_n = 0$.
+\end{proposition}
+\noindent Доказателство:\\
+Нека $\displaystyle \sum_{n=1}^\infty a_n$ е сходящ, значи $\displaystyle \sum_{n=1}^\infty a_n = S < \infty$. Да разгледаме парциалните суми 
+$$S_n = a_1 + a_2 + \cdots + a_n$$
+$$S_{n-1} = a_1 + a_2 + \cdots + a_{n-1}$$
+Имаме 
+\begin{align*}
+    \lim_{n \rightarrow \infty} a_n
+    &= \lim_{n \rightarrow \infty}(S_n - S_{n-1})\\
+    &= \lim_{n \rightarrow \infty}S_n - \lim_{n \rightarrow \infty}S_{n-1}\\
+    &= S - S\\
+    &= 0.
+\end{align*}
+
+\begin{proposition}
+    \textbf{(Необходимо и достатъчно условие за сходимост на ред)}\\
+    Редът $\displaystyle \sum_{n=1}^\infty a_n$ е сходящ тогава и само тогава, когато \\
+    $\forall \varepsilon > 0 \: \exists \: \nu \in \mathbb{N}$ такова, че $n > m > \nu \implies |S_n - S_m| < \varepsilon$.
+\end{proposition}
+
+\begin{proposition}
+    \textbf{(Сравнителен критерий на Вайерщрас)}\\
+    Дадени са редовете $\displaystyle \sum_{n=1}^\infty a_n$ и $\displaystyle \sum_{n=1}^\infty b_n$. 
+    Нека съществува $n_1 \in \mathbb{N},$ за което е изп. $n \geq n_1 \implies 0 \leq a_n \leq b_n$.\\
+    Тогава е изпълнено 
+    \begin{enumerate}
+        \item $\displaystyle \sum_{n=1}^\infty a_n \: \text{е разходящ} \implies \displaystyle \sum_{n=1}^\infty b_n \: \text{е разходящ}$.
+        \item $\displaystyle \sum_{n=1}^\infty b_n \: \text{е сходящ} \implies \displaystyle \sum_{n=1}^\infty a_n \: \text{е сходящ}$.
+    \end{enumerate}
+\end{proposition}
+\noindent Доказателство:\\
+Ще докажем второто твърдение. Нека $\displaystyle S = \sum_{n=1}^\infty b_n$ е сходящ, значи за него е изпълнено НДУ за сходимост на ред.\\
+Нека $\varepsilon > 0,$ за него съществува $\nu \in \mathbb{N}$ такова, че $n > m > \nu \implies |S_n - S_m| < \varepsilon$.
+\\Нека сега $\nu' = max\{\nu, \: n_1\}$. Тогава имаме \\
+$n > m > \nu' \implies |S_n - S_m| < \varepsilon.$
+Дясната страна на импликацията може да се запише като 
+$$b_{m+1} + b_{m+2} + \cdots + b_n < \varepsilon$$
+Но понеже $\nu' \geq n_1,$ имаме, че
+$$a_{m+1} + a_{m+2} + \cdots + a_n \leq b_{m+1} + b_{m+2} + \cdots + b_n < \varepsilon$$
+Значи условието от НДУ е изпълнено също и за реда $\displaystyle \sum_{n=1}^\infty a_n,$ и той е сходящ.\\
+Първото твърдение е контрапозиция на второто, значи сме готови.\\
+
+\begin{problem}
+    Нека за редиците с положителни членове $a_n$ и $b_n$ e изпълнено $a_n \leq 3b_n$ за $n \geq 2021$.
+    Докажете, че ако $\displaystyle \sum_{n=1}^\infty a_n$ е разходящ, то $\displaystyle \sum_{n=1}^\infty b_n$ е разходящ.
+\end{problem}
+\noindent Доказателство:\\
+Нека $\displaystyle \sum_{n=1}^\infty a_n$ е разходящ, тогава за него не е изпълнено НДУ за сходимост на ред, т.е имаме\\
+$\exists \: \varepsilon > 0 \: \forall \: \nu \: \exists n, m : n > m > \nu$ и 
+$a_{m+1} + a_{m+2} + \cdots + a_n \geq \varepsilon$.\\
+Нека изберем това $\varepsilon,$ за което горното е изпълнено и нека също изберем $\nu = 2017$. \\
+Тогава съществуват $n > m > 2017,$ за които \\
+$a_{m+1} + a_{m+2} + \cdots + a_n \geq \varepsilon,$
+също от условието имаме $a_{m+1} + a_{m+2} + \cdots + a_n \leq 3(b_{m+1} + b_{m+2} + \cdots + b_n)$.\\\\
+От тук
+$$b_{m+1} + b_{m+2} + \cdots + b_n \geq \frac{\varepsilon}{3}$$
+
+\noindent Значи НДУ не е изпълнено и за редът $\displaystyle \sum_{n=1}^\infty b_n,$ и той също е разходящ. 
+
+\begin{problem}
+    Нека за редиците с положителни членове $a_n$ и $b_n$ е изпълнено $\displaystyle \lim_{n \rightarrow \infty}\frac{a_n}{b_n} = 155$. 
+    Докажете, че ако редът $\displaystyle \sum_{n=1}^\infty a_n$ е сходящ, то и $\displaystyle \sum_{n=1}^\infty b_n$ е сходящ.
+\end{problem}
+\noindent Доказателство:\\\\
+Ще използваме дефиницията за граница. Имаме \\
+$\forall \: \varepsilon > 0 \: \exists \: \nu : \: \forall n > \nu$ е изпълнено $\left|\dfrac{a_n}{b_n} - 155\right| < \varepsilon$.
+Това е същото като
+$$-\varepsilon < \frac{a_n}{b_n} - 155 < \varepsilon$$
+$$155 -\varepsilon < \frac{a_n}{b_n} < 155 + \varepsilon$$
+Разглеждайки само лявата част на неравенството и умножавайки на кръст:
+$$b_n < \frac{a_n}{155 - \varepsilon}$$
+По условие $\displaystyle \sum_{n=1}^\infty a_n$ е сходящ, значи и $\displaystyle \frac{1}{155 - \varepsilon}\sum_{n=1}^\infty a_n$ е сходящ, а от сравнителен критерий 
+следва, че и $\displaystyle \sum_{n=1}^\infty b_n$ е сходящ.
+
+\begin{proposition}
+    \textbf{(Интегрален критерий за сходимост на ред)}\\
+    Нека $f(x)$ e непрекъсната, положителна и монотонно намаляваща в интервала $[1, \infty)$ и нека $f(n) = a_n, \: n \in \mathbb{N}$.
+    Тогава $\displaystyle \int_1^\infty f(x)dx$ е сходящ $\displaystyle \iff \sum_{n=1}^\infty a_n$ е сходящ. 
+\end{proposition}
+\noindent Доказателство:\\\\
+Нека $x \in [n, n+1]$. Тогава имаме 
+$$f(n) \geq f(x) \geq f(n+1)$$
+Ще интегрираме неравенството в граници от $n$ до $n+1:$
+$$\int_n^{n+1}f(n)dx \geq \int_n^{n+1}f(x)dx \geq \int_n^{n+1}f(n+1)dx$$
+$$f(n) \geq \int_n^{n+1}f(x)dx \geq f(n+1)$$
+$$a_n \geq \int_n^{n+1}f(x)dx \geq a_{n+1}$$
+Горното е валидно за произволно естествено $n,$ да сумираме от $1$ до $N-1$:
+$$\sum_{n=1}^{N-1} a_n \geq \int_1^N f(x)dx \geq \sum_{n=1}^{N-1} a_{n+1}$$
+
+\noindent Нека сега интегралът $\displaystyle \int_1^\infty f(x)dx$ е сходящ, взимаме граничен преход $(N \to \infty)$ на дясната част от неравенството и имаме 
+$$\int_1^\infty f(x)dx \geq \sum_{n=2}^\infty a_n$$
+Понеже интегралът е сходящ, т.е $\displaystyle \int_1^\infty f(x)dx$ е крайно число и $a_n > 0,$ то 
+остава $\displaystyle \sum_{n=2}^\infty a_n$ също да е крайно число, от тук и 
+$$\sum_{n=1}^\infty a_n = a_1 + \sum_{n=2}^\infty a_n$$
+също е крайно число, т.е редът е сходящ.\\\\
+Обратно, нека редът $\displaystyle \sum_{n=1}^\infty$ е сходящ, взимаме граничен преход на лявата част на неравенството по-горе и имаме
+$$\sum_{n=1}^\infty a_n \geq \int_1^\infty f(x)dx$$
+Редът е сходящ, т.е интегралът е ограничен от крайно число отгоре и е положителен (защото $f(x)$ е положителна), значи интегралът 
+също е крайно число, т.е е сходящ.
+
+\begin{proposition}
+    \textbf{(Критерий на Даламбер за сходимост на ред)}\\
+    Нека $a_n > 0$ за всяко $n \in \mathbb{N},$ разглеждаме реда $\displaystyle S = \sum_{n=1}^\infty a_n$.
+    \begin{enumerate}
+        \item Ако съществува $n_1: \: \forall n \geq n_1 \: \exists \: q < 1: \:\: \dfrac{a_{n+1}}{a_n} \leq q < 1,$ то $S$ е сходящ.
+        \item Ако съществува $n_1: \: \forall n \geq n_1 \:\: \dfrac{a_{n+1}}{a_n} \geq 1,$ то $S$ е разходящ.
+    \end{enumerate}
+\end{proposition}
+\noindent Доказателство:\\\\
+1) Нека за някакво $n_1$ е изпълнено $\forall n \geq n_1 \: \exists q < 1: \:\: \dfrac{a_{n+1}}{a_n} \leq q < 1$.\\
+Имаме\\
+$a_{n_1 + 1} \leq q a_{n_1}$\\
+$a_{n_1 + 2} \leq q a_{n_1 + 1}$\\
+$\cdots$\\
+$a_{n-1} \leq q a_{n-2}$\\
+$a_n \leq q a_{n-1}$\\\\
+От тук,\\\\
+$$a_n \leq q a_{n-1} \leq q^2 a_{n-2} \leq \cdots \leq q^{n-n_1}a_{n_1} = q^n \cdot \frac{a_{n_1}}{q^{n_1}}$$
+За $n > n_1$. Числото $\displaystyle \frac{a_{n_1}}{q^{n_1}} := c$ е константа.
+Значи от $n_1$ нататък, 
+$$a_n \leq c\cdot q^n, \: \: |q| < 1.$$
+Но редът $\displaystyle \sum_{n = n_1 + 1}^\infty c \cdot q^n$ е сходящ, значи от сравнителен критерий 
+имаме, че и $\displaystyle \sum_{n = n_1 + 1}^\infty a_n$ е сходящ, от тук по-общо $\displaystyle \sum_{n = 1}^\infty a_n$ е сходящ.\\\\
+\noindent 2) Нека сега съществува $n_1: \: \forall n \geq n_1 \: \dfrac{a_{n+1}}{a_n} \geq 1$.\\
+Тогава от $n_1$ нататък редицата $a_n$ е монотонно растяща, значи не е изпълнено необходимото условие за 
+сходимост на ред и $\displaystyle \sum_{n=1}^\infty a_n$ със сигурност е разходящ.
+
+\begin{proposition}
+    \textbf{(Критерий на Коши за сходимост на ред)}\\
+    Нека $a_n \geq 0$ за всяко $n \in \mathbb{N}$.
+    \begin{enumerate}
+        \item Ако съществува $n_1: \: \forall n \geq n_1 \: \exists q: \:\: \sqrt[n]{a_n} \leq q < 1,$ то редът е сходящ.
+        \item Ако съществува $n_1: \: \forall n \geq n_1 \:\: \sqrt[n]{a_n} \geq 1,$ то редът е разходящ.
+    \end{enumerate}
+\end{proposition}
+\noindent Доказателство:\\\\
+1) Нека е изпълнено условието от първото твърдение, разглеждаме произволно $n \geq n_1,$ имаме 
+$$\sqrt[n]{a_n} \leq q$$
+$$a_n \leq q^n$$
+Понеже $q < 1,$ редът $\displaystyle \sum_{n=n_1}^\infty q^n$ е сходящ и от сравнителен критерий следва, че 
+$\displaystyle \sum_{n=n_1}^\infty a_n$ е сходящ, по-общо $\displaystyle \sum_{n=1}^\infty a_n$ е сходящ.\\\\
+\noindent 2) Нека е изпълнено условието от второто твърдение и нека $n \geq n_1$, имаме 
+$$a_n \geq 1$$
+Значи необходимото условие за сходимост на ред не е изпълнено и от тук редът $\displaystyle \sum_{n=1}^\infty a_n$ е разходящ.
+
+\begin{proposition}
+    \textbf{(Крийтерий на Кумер за сходимост на ред)}\\
+    Нека $a_n > 0, \: c_n > 0$. Нека $\displaystyle \sum_{n=1}^\infty \frac{1}{c_n}$ е разходящ и \\
+    $k_n = c_n \dfrac{a_n}{a_{n+1}} - c_{n+1}$. Тогава е изпълнено 
+    \begin{enumerate}
+        \item Ако съществува $n_1: \: \forall n \geq n_1 \: \exists \: \delta > 0 \:\: k_n \geq \delta,$ то редът е сходящ.
+        \item Ако съществува $n_1: \: \forall n \geq n_1 \:\: k_n \leq 0,$ то редът е разходящ.
+    \end{enumerate}
+\end{proposition}
+\noindent Доказателство:\\\\
+1) Нека за някое естествено $n_1$ е изпълнено $\forall n \geq n_1$
+$$c_n \frac{a_n}{a_{n+1}} - c_{n+1} \geq \delta, \:\: \delta > 0.$$
+$$c_n a_n - c_{n+1} a_{n+1} \geq \delta a_{n+1} > 0 \:\:\:\:\:\: (1)$$
+Дефинираме реда \\
+$b_n = c_n a_n - c_{n+1}a_{n+1} > 0$.\\\\
+Разглеждаме сумата \\
+\begin{align*}
+    b_1 + b_2 + \cdots + b_n
+    &= c_1 a_1 - c_2 a_2 + c_2 a_2 - c_3 a_3 + \cdots + c_n a_n - c_{n+1} a_{n+1}\\   
+    &= c_1 a_1 - c_{n+1}a_{n+1} \leq c_1 a_1.
+\end{align*}
+
+\noindent Тоест редът $\displaystyle \sum_{k=1}^n b_k$ винаги е ограничен и от тук $\displaystyle \sum_{n=1}^\infty b_n$ е сходящ.\\
+Връщайки се на $(1),$ имаме $b_n \geq \delta a_{n+1}$. Но редът $\displaystyle \sum_{n=1}^\infty b_n$ е сходящ, значи от 
+сравнителен критерий следва, че редът $\displaystyle \sum_{n=1}^\infty \delta a_{n+1}$ е сходящ, по-общо 
+редът $\displaystyle \sum_{n=1}^\infty a_n$ е сходящ.\\\\
+\noindent 2) Нека сега за някое естествено $n_1$ е изпълнено $\forall n \geq n_1 \:\: k_n \leq 0$.
+$$c_n \frac{a_n}{a_{n+1}} - c_{n+1} \leq 0$$
+$$c_n a_n \leq c_{n+1} a_{n+1}$$
+Тоест имаме 
+$$const = c := c_{n_1}a_{n_1} \leq \cdots \leq c_n a_n \leq c_{n+1} a_{n+1}$$
+В частност, 
+$$a_{n+1} \geq \frac{c}{c_{n+1}}$$
+Но по условие знаем, че редът $\displaystyle \sum_{n=1}^\infty \frac{c}{c_{n+1}}$ е разходящ, значи 
+от сравнителен критерий имаме, че и редът $\displaystyle \sum_{n=1}^\infty a_{n+1}$ също е разходящ.
+Очевидно от тук $\displaystyle \sum_{n=1}^\infty a_n$ също е разходящ.
+
+\begin{proposition}
+    \textbf{(Критерий за сходимост на ред на Раабе-Дюамел)}\\
+    Нека $a_n > 0 \: \forall n \in \mathbb{N}$.
+    \begin{enumerate}
+        \item Ако съществува естествено $n_1: \: \forall n \geq n_1 \: \exists q: \:\: n(\dfrac{a_n}{a_{n+1}} - 1) \geq q > 1,$ то редът е сходящ.
+        \item Ако съществува естествено $n_1: \: \forall n \geq n_1 \:\: n(\dfrac{a_n}{a_{n+1}} - 1) \leq 1,$ то редът е разходящ.
+    \end{enumerate}
+\end{proposition}
+\noindent Доказателство:\\\\
+Критерият на Раабе-Дюамел е частен случай на критерият на Кумер, където редицата $c_n = n$. \clearpage
+
+\begin{definition}
+    $R$ наричаме \textbf{радиус на сходимост} на реда $\displaystyle \sum_{n=0}^\infty a_n x^n,$ 
+    ако редът е сходящ за $x \in (-R, R)$ и разходящ за $x \in (-\infty, \: -R) \cup (R, \: \infty)$.\\
+    Ако редът е винаги разходящ при $x \neq 0,$ приемаме, че $R = 0$. Ако е сходящ за всяко $x,$ пишем $R = (-\infty, \infty)$.
+\end{definition}
+
+\begin{problem}
+    Нека $a_n$ е редица, за която $\displaystyle \lim_{n \to \infty} \sqrt[n]{|a_{n+1}|} = \frac{1}{2021}$.
+    Докажете, че радиусът на сходимост на степенния ред $\displaystyle \sum_{n=0}^\infty a_n x^n$ е равен на $2021$.
+\end{problem}
+\noindent Доказателство:\\\\
+Използваме критерия на Коши за сходимост на ред, т.е разглеждаме 
+$$\lim_{n \to \infty} \sqrt[n]{|a_n x^n|} = \frac{|x|}{2021}$$
+Според критерия на Коши, за да е сходим реда, трябва
+$$\frac{|x|}{2021} < 1$$
+или
+$$|x| < 2021$$
+Тоест радиусът на сходимост на реда е $2021$.
+
+\clearpage
+\begin{definition}
+    Редът $\displaystyle \sum_{n=1}^\infty (-1)^{n+1}a_n,$ където $a_n > 0$ ще наричаме алтерниращ.
+\end{definition}
+
+\begin{proposition}
+    \textbf{(Критерий на Лайбниц за сходимост на алтерниращ ред)}\\
+    Нека редицата $a_n > 0$ е монотонно намаляваща и $\displaystyle \lim_{n \rightarrow \infty} a_n = 0$. 
+    Тогава алтерниращият ред $\displaystyle S = \sum_{n=1}^\infty (-1)^{n+1} a_n$ е сходящ (наричаме го условно сходящ).
+\end{proposition}
+\noindent Доказателство:\\\\
+Ще разгледаме поотделно парциалните суми съответно с четни и нечетни индекси. Имаме (за някакво $n \geq 1$)
+$$S_{2n+2} = S_{2n} + a_{2n+1} - a_{2n+2} \geq S_{2n}$$
+Също, 
+$$S_{2n+1} = S_{2n-1} - a_{2n} + a_{2n+1} \leq S_{2n-1}$$
+
+\noindent По-точно, редицата от четни индекси расте монотонно, а редицата от нечетни индекси намалява монотонно. Но също така, понеже 
+нечетните индекси са винаги положителни, имаме $S_{2n} \leq S_{2n+1}$. От тук, за някакво $n,$
+$$S_2 \leq S_4 \leq S_6 \leq \cdots \leq S_{2n} \leq S_{2n+1} \leq S_{2n-1} \leq \cdots \leq S_1$$
+
+\noindent Тоест, $\{S_{2n}\}$ е монотонно растяща и ограничена отгоре от $S_1,$ а $\{S_{2n-1}\}$ e монотонно намаляваща 
+и ограничена отдолу от $S_2$. Значи и двете редици са сходящи, нека тогава 
+$$\lim_{n \to \infty}S_{2n} = S', \:\: \lim_{n \to \infty}S_{2n+1} = S''$$
+Да разгледаме равенството
+$$S_{2n+1} - S_{2n} = a_{2n+1}$$
+Вземаме граница и използваме, че $a_n \rightarrow 0$:
+$$S' - S'' = 0$$
+$$S' = S''$$
+Значи $S_n$ клони към едно и също $S'$ независимо как вземаме границата, т.е редът е сходящ.  
+
+\begin{problem}
+    \textbf{(Бонус)} Нека за редицата с положителни членове $a_n$ e изпълнено, че \\
+    $\displaystyle \lim_{n\to \infty} n(\frac{a_n}{a_{n+1}} - 1) = \frac{1}{2021} \cdot$
+    Докажете, че $a_n$ е монотонно намаляваща и $\displaystyle \lim_{n\to \infty}a_n = 0$.
+\end{problem}
+\noindent Доказателство:\\\\
+Щом $n(\dfrac{a_n}{a_{n+1}}-1) \rightarrow \dfrac{1}{2021},$ то 
+съществува $n_1: \: \forall n \geq n_1$
+$$n(\dfrac{a_n}{a_{n+1}}-1) > 0$$
+След малко манипулация на горното неравенсто получаваме 
+$$a_n > a_{n+1}$$
+Тоест наистина $a_n$ е монотонно намаляваща.
+\\
+Нека сега разгледаме реда $\displaystyle \sum_{n=1}^\infty a_n^k, \: k \in \mathbb{N}$. Разглеждаме 
+границата от критерия на Раабе-Дюамел:
+
+\begin{align*}
+    \lim_{n\to \infty} n (\frac{a_n^k}{a_{n+1}^k} - 1)
+    &= \lim_{n \to \infty} n(\frac{a_n}{a_{n+1}} - 1) \left( (\frac{a_n}{a_{n+1}})^{k-1} + (\frac{a_n}{a_{n+1}})^{k-2} + \cdots + 1 \right)\\
+    &= \frac{1}{2021} \left( (\frac{a_n}{a_{n+1}})^{k-1} + (\frac{a_n}{a_{n+1}})^{k-2} + \cdots + 1 \right)\\
+    &> \frac{k}{2021}   
+\end{align*}
+Нека например $k = 2022,$ тогава от критерия на Раабе-Дюамел следва, че редът
+$\displaystyle \sum_{n=1}^\infty a_n^{2022}$ е сходящ. От необходимо условие за сходимост имаме, че 
+$a_n^{2022} \rightarrow 0,$ от тук и $a_n \rightarrow 0$.
+
+
+\end{document}
